@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ChatService } from '../services/chat.service';
 
 @Component({
   selector: 'app-water-level',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WaterLevelComponent implements OnInit {
 
-  constructor() { }
+  constructor(private chat: ChatService) { }
+
+  protected porcentagem: string;
 
   ngOnInit() {
+    this.chat.messages.subscribe(level => {
+      console.log(level);
+      this.porcentagem = level;
+    });
   }
-
 }
+

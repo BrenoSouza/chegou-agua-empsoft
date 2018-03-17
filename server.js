@@ -16,9 +16,23 @@ const server = http.createServer(app);
 
 const io = socketIO(server);
 
+var router = express.Router();
+
+router.post('/armazena', function(req, res){
+    var body = req.body;
+
+    var data = {
+        porcentagem: body.porcentagem,
+        litros: body.litros
+    };
+
+    io.emit('notificacao', {type:'new-message', text: toString(body.porcentagem)});    
+
+});
+
+
 io.on('connection', (socket) => {
     console.log('emitindo');
-    io.emit('notificacao', {type:'new-message', text: 'foiii carai'});    
 });
 
 io.on('disconnect', () => {

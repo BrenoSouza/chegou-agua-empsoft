@@ -2,8 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { ChatService } from './chat.service';
-import { WebsocketService } from './websocket.service';
+import { ChatService } from './services/chat.service';
+import { WebsocketService } from './services/websocket.service';
 import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({

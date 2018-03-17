@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as io from 'socket.io-client';
-import { ChatService } from './chat.service';
+import { ChatService } from './services/chat.service';
 
 @Component({
   selector: 'app-root',
@@ -17,9 +17,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.chat.messages.subscribe(msg => {
-      console.log(msg);
-    });
   }
 
 }
