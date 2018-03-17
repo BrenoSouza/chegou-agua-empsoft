@@ -17,13 +17,13 @@ const server = http.createServer(app);
 const io = socketIO(server);
 
 io.on('connection', (socket) => {
-    console.log('new user connected');
+    console.log('emitindo');
+    io.emit('notificacao', {type:'new-message', text: 'foiii carai'});    
 });
 
 io.on('disconnect', () => {
     console.log('user disconnected');
 });
-
 
 server.listen(port, () => {
     console.log('Server is running on port ${port}');
