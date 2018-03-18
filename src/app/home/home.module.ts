@@ -7,6 +7,7 @@ import { HeaderModule } from '../header/header.module';
 import { ChatService } from '../chat.service';
 import { WaterLevelModule } from '../water-level/water-level.module';
 import { GraphicModule } from '../graphic/graphic.module';
+import { TabsModule } from 'ngx-bootstrap/tabs';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { GraphicModule } from '../graphic/graphic.module';
     SharedModule,
     homeRouting,
     HeaderModule,
-    WaterLevelModule
+    WaterLevelModule,
+    TabsModule.forRoot()
   ],
   declarations: [HomeComponent],
   providers: [

@@ -7,14 +7,26 @@ import { ChatService } from '../chat.service';
   styleUrls: ['./water-level.component.css']
 })
 export class WaterLevelComponent implements OnInit {
-  protected porcentagem;
-  protected litros;
+  protected alert = 'success';
+  protected porcentagem = 0;
+  protected litros = 0;
+
   constructor(private socketService: ChatService) { }
 
   ngOnInit() {
     this.socketService.messages.subscribe(data => {
-      this.porcentagem = data.porcentagem;
-      this.litros = data.litros;
+      if (data.porcentagem || data.porcentagem != null) {
+        this.porcentagem = Number(data.porcentagem) * 100;
+        this.litros = data.litros;
+
+        if (this.porcentagem >= 50) {
+          this.alert = 'success';
+        } else if (this.porcentagem > 25) {
+          this.alert = 'warning';
+        } else {
+          this.alert = 'danger';
+        }
+      }
     });
   }
 
