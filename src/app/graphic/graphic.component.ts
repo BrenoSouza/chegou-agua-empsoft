@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CrudServiceService } from '../crud-service.service';
 
 @Component({
   selector: 'app-graphic',
@@ -8,9 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class GraphicComponent implements OnInit {
   protected lineChartType  = 'line';
   protected lineChartLabels = ['Nível'];
-  protected lineChartData = [
-    [28, 48, 40, 19, 86, 27, 90]
-  ];
+  protected lineChartData = [];
 
   protected lineChartOptions = {
     responsive: true
@@ -27,9 +26,14 @@ export class GraphicComponent implements OnInit {
     }
   ];
 
-  constructor() { }
+  constructor(public crud: CrudServiceService) { }
 
   ngOnInit() {
+    this.crud.getHistorico().subscribe(array => {
+      this.lineChartData.push(array);
+    }, error => {
+      console.log(error);
+    });
   }
 
   chartClicked(e: any) {
