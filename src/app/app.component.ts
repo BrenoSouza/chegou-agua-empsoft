@@ -12,14 +12,10 @@ export class AppComponent implements OnInit {
   socket;
 
   constructor(private chat: ChatService) {
-    this.socket = io();
 
   }
 
   ngOnInit() {
-    this.chat.messages.subscribe(msg => {
-      console.log(msg);
-    });
   }
 
 }

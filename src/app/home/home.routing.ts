@@ -5,8 +5,6 @@ import { ModuleWithProviders } from '@angular/core';
 
 const homeRoutes: Routes = [
     { path: '', component: HomeComponent, children: [
-        { path: '', redirectTo: 'water', pathMatch: 'prefix' },
-        { path: 'water', loadChildren: 'app/water-level/water-level.module#WaterLevelModule' }
     ]
     }
 ];

@@ -6,13 +6,16 @@ import { ChatService } from './chat.service';
 import { WebsocketService } from './websocket.service';
 import { AppRoutingModule } from './app-routing.module';
 
+import { HttpModule } from '@angular/http';
+
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpModule
   ],
   providers: [ChatService, WebsocketService],
   bootstrap: [AppComponent]

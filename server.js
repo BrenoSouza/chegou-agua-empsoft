@@ -8,7 +8,7 @@ var mongoose = require ('mongoose');
 
 var Array = require('./model/array');
 
-mongoose.connect('mongodb://localhost/chegou-agua');
+mongoose.connect('mongodb://breno:12345@ds117749.mlab.com:17749/chegou-agua');
 
 const app = express();
 const port = process.env.PORT || 3000;
