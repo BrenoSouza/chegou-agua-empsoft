@@ -104,16 +104,15 @@ router.post('/armazena', function(req,res){
             }
           });
 
-          novoArray.save(function (err, result, next) {
+          novoArray.save(function (err, result) {
             if (err) {
               return res.status(500).json({
                 title: 'An error occurred',
                 error: err
               });
-            } else {
-              console.log('emitiu');
+            } else{
               io.emit('notificacao',data);
-              res.status(200).json({
+              return res.status(200).json({
                 message: 'Salvou geral!',
                 obj: result
               });
@@ -132,10 +131,15 @@ router.get('/historico', function(req, res){
         title: 'An error occurred',
         error: err
       });
+    } else if(a === undefined || a === null){
+        return res.status(500).json({
+        title: 'Não há histórico discponível!'
+      });
     } else {
-      return res.status(200).json({
-        message: 'Array enviado!',
+        return res.status(200).json({
+        message: 'Histórico enviado!',
         obj: a.array
+
       });
     }
   });
