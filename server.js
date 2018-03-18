@@ -29,7 +29,7 @@ const io = socketIO(server);
 
 io.on('connection', (socket) => {
     console.log('emitindo');
-    io.emit('notificacao', {type:'new-message', text: 'foiii carai'});
+    io.emit('notificacao', {type:'new-message', text: 'Deu certo!'});
 });
 
 io.on('disconnect', () => {
@@ -43,9 +43,13 @@ server.listen(port, () => {
 router.post('/armazena', function(req,res){
   var body = req.body;
 
+  var dt = new Date();
+  var date = dt.toLocaleString()
+
   var data = {
     porcentagem: body.porcentagem,
-    litros: body.litros
+    litros: body.litros,
+    data: date
   };
 
   var a = [];
@@ -108,7 +112,7 @@ router.post('/armazena', function(req,res){
               });
             } else {
               console.log('emitiu');
-              io.emit('notificacao',body);
+              io.emit('notificacao',data);
               res.status(200).json({
                 message: 'Salvou geral!',
                 obj: result
