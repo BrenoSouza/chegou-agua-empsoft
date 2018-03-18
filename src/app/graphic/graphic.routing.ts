@@ -4,8 +4,8 @@ import { ModuleWithProviders } from '@angular/core';
 
 
 const graphicRoutes: Routes = [
-    { path: '', component: GraphicComponent, children: [
-    ]
+    {
+        path: '', component: GraphicComponent
     }
 ];
 export const graphicRouting: ModuleWithProviders = RouterModule.forChild(graphicRoutes);

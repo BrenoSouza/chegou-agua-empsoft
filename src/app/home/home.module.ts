@@ -16,6 +16,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
     homeRouting,
     HeaderModule,
     WaterLevelModule,
+    GraphicModule,
     TabsModule.forRoot()
   ],
   declarations: [HomeComponent],
