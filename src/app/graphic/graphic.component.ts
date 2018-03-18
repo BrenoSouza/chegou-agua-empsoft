@@ -29,8 +29,13 @@ export class GraphicComponent implements OnInit {
   constructor(public crud: CrudServiceService) { }
 
   ngOnInit() {
-    this.crud.getHistorico().subscribe(array => {
-      this.lineChartData.push(array);
+    this.crud.getHistorico().subscribe(data => {
+      const array = data.obj;
+      const elements = [];
+      array.forEach(element => {
+        elements.push(element.porcentagem);
+      });
+      this.lineChartData = elements;
     }, error => {
       console.log(error);
     });

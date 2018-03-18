@@ -1,10 +1,10 @@
-<h2>O nível da sua caixa d'agua está em:</h2>
+<div class="info">
 
-<h1>{{porcentagem * 100}}%</h1>
+  <h1>{{porcentagem * 100}}%</h1>
 
-<h2>Restam {{litros}} litros</h2>
+  <h2>Restam {{litros}} litros</h2>
+</div>
 
-
-<div class="mb-2">
+<div class="progress-bar-container">
     <progressbar [animate]="true" [value]="porcentagem" [type]="alert"><b>{{porcentagem}}%</b></progressbar>
   </div>
