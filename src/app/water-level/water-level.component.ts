@@ -10,6 +10,9 @@ export class WaterLevelComponent implements OnInit {
   protected alert = 'success';
   protected porcentagem = 0;
   protected litros = 0;
+  protected banhos = 0;
+  protected lavarRoupa = 0;
+  protected descarga = 0;
 
   constructor(private socketService: ChatService) { }
 
@@ -26,6 +29,10 @@ export class WaterLevelComponent implements OnInit {
         } else {
           this.alert = 'danger';
         }
+
+        this.banhos = this.litros / 20;
+        this.lavarRoupa = this.litros / 16;
+        this.descarga = this.litros / 20;
       }
     });
   }
