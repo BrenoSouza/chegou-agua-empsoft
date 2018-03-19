@@ -3,7 +3,8 @@ import { AppComponent } from './app.component';
 import { NgModule } from '@angular/core';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full'},
+  { path: '', redirectTo: '/initial', pathMatch: 'full'},
+  { path: 'initial', loadChildren: 'app/initial/initial.module#InitialModule' },
   { path: 'home', loadChildren: 'app/home/home.module#HomeModule' },
 ];
 

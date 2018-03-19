@@ -4,8 +4,7 @@ import { ModuleWithProviders } from '@angular/core';
 
 
 const homeRoutes: Routes = [
-    { path: '', component: HomeComponent, children: [
-    ]
+    { path: '', component: HomeComponent
     }
 ];
 export const homeRouting: ModuleWithProviders = RouterModule.forChild(homeRoutes);
