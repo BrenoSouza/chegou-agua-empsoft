@@ -8,3 +8,33 @@
 <div class="progress-bar-container">
     <progressbar [animate]="true" [value]="porcentagem * 100" [type]="alert"><b>{{porcentagem * 100}}%</b></progressbar>
   </div>
+
+<div>
+  Com essa quantidade de água, você ainda pode:
+<div>
+
+<table class="table table-bordered">
+   <thead>
+     <tr>
+       <th>Atividade</th>
+       <th>Quantas vezes pode realizar</th>
+     </tr>
+   </thead>
+   <tbody>
+     <tr>
+       <td>Banho</td>
+       <td>{{banhos}}</td>
+     </tr>
+     <tr>
+       <td>Lavagem de roupas</td>
+       <td>{{lavarRoupa}}</td>
+     </tr>
+     <tr>
+       <td>Descarga</td>
+       <td>{{descarga}}</td>
+     </tr>
+   </tbody>
+ </table>
+
+<span> Baseado no perfil do uso da água na economia doméstica para quatro pessoas. </span>
+<a src="http://site.sanepar.com.br/sites/novo.sanepar.com.br/files/content_images/informacoes/economia_tablea.jpg"> Fonte: SANEPAR </a>
