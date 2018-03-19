@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { ChatService } from '../chat.service';
+import { CrudServiceService } from '../crud-service.service';
 
 @Component({
   selector: 'app-water-level',
@@ -39,15 +40,42 @@ export class WaterLevelComponent implements OnInit {
 
   get level(): any { return this._level; }
 
+  // Doughnut
+  public dougChartData: Array<any> = [{}];
 
-  constructor(private socketService: ChatService) { }
+  protected doughnutChartLabels: string[] = ['Porcentagem de Água', 'Pocentagem Vazia' ];
+  protected doughnutChartData: number[] = [];
+  protected doughnutChartType: string = 'doughnut';
+
+  protected dougChartColors = [
+    {
+      backgroundColor: ['#89C4F4', 'rgba(148,159,177,0.2)'],
+      borderColor: ['#22A7F0']
+    }
+  ];
+
+  constructor(private socketService: ChatService,
+              private crud: CrudServiceService) { }
 
   ngOnInit() {
+    if (this.porcentagem === 0) {
+
+      this.crud.getHistorico().subscribe(data => {
+        const array = data.obj;
+
+        this.porcentagem = Number(array[array.length - 1].porcentagem) * 100;
+        this.litros = Number(array[array.length - 1].litros);
+        this.dougChartData = [{data: [this.porcentagem, 100 - this.porcentagem], label: ['Nível de Água', 'Vazio']}];
+      }, error => {
+        console.log(error);
+      });
+    }
+
     this.socketService.messages.subscribe(data => {
       if (data.porcentagem || data.porcentagem != null) {
         this.porcentagem = Number(data.porcentagem) * 100;
         this.litros = data.litros;
-
+        this.dougChartData = [{data: [this.porcentagem, 100 - this.porcentagem], label: ['Nível de Água', 'Vazio']}];
         if (this.porcentagem >= 50) {
           this.alert = 'success';
         } else if (this.porcentagem > 25) {
@@ -64,5 +92,14 @@ export class WaterLevelComponent implements OnInit {
       }
     });
   }
+
+    // events
+    public chartClicked(e:any): void {
+      console.log(e);
+    }
+
+    public chartHovered(e: any): void {
+      console.log(e);
+    }
 
 }

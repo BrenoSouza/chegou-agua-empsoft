@@ -3,8 +3,18 @@
 </div>
 
 <div class="progress-bar-container">
-  <progressbar [animate]="true" [value]="porcentagem" [type]="alert"><b>{{porcentagem}}%</b></progressbar>
+    <div style="display: block">
+        <canvas baseChart
+                    [data]="dougChartData"
+                    [labels]="doughnutChartLabels"
+                    [chartType]="doughnutChartType"
+                    [colors]="dougChartColors"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+      </div>
+  <!--<progressbar [animate]="true" [value]="porcentagem" [type]="alert"><b>{{porcentagem}}%</b></progressbar>-->
 </div>
+
 <div class="info">
   <h2>Restam {{litros}} litros</h2>
 </div>
