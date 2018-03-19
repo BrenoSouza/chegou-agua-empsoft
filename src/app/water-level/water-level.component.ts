@@ -65,6 +65,11 @@ export class WaterLevelComponent implements OnInit {
 
         this.porcentagem = Number(array[array.length - 1].porcentagem) * 100;
         this.litros = Number(array[array.length - 1].litros);
+
+        this.banhos = this.litros / 20;
+        this.lavarRoupa = this.litros / 16;
+        this.descarga = this.litros / 20;
+
         this.dougChartData = [{data: [this.porcentagem, 100 - this.porcentagem], label: ['Nível de Água', 'Vazio']}];
       }, error => {
         console.log(error);
