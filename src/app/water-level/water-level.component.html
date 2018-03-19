@@ -1,14 +1,13 @@
 <div class="info">
-
-  <h1>{{porcentagem * 100}}%</h1>
-
-  <h2>Restam {{litros}} litros</h2>
+    <h1>{{porcentagem}}%{{level}}</h1>
 </div>
 
 <div class="progress-bar-container">
-    <progressbar [animate]="true" [value]="porcentagem" [type]="alert"><b>{{porcentagem}}%</b></progressbar>
-  </div>
-
+  <progressbar [animate]="true" [value]="porcentagem" [type]="alert"><b>{{porcentagem}}%</b></progressbar>
+</div>
+<div class="info">
+  <h2>Restam {{litros}} litros</h2>
+</div>
 <div>
   Com essa quantidade de água, você ainda pode:
 <div>
@@ -23,7 +22,7 @@
    <tbody>
      <tr>
        <td>Banho</td>
-       <td>{{banho}}</td>
+       <td>{{banhos}}</td>
      </tr>
      <tr>
        <td>Lavagem de roupas</td>

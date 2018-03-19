@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  public level: any;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  updateLevel($event: any) {
+    this.level = $event;
   }
 
 }

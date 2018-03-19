@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { CrudServiceService } from '../crud-service.service';
 
 @Component({
@@ -7,14 +7,9 @@ import { CrudServiceService } from '../crud-service.service';
   styleUrls: ['./graphic.component.css']
 })
 export class GraphicComponent implements OnInit {
-  protected lineChartType  = 'line';
-  protected lineChartLabels = ['Nível'];
-  protected lineChartData = [];
-
-  protected lineChartOptions = {
-    responsive: true
-  };
-
+  public lineChartData: Array<any> = [{}];
+  public lineChartLabels: Array<any> = [];
+  protected lineChartType = 'line';
   protected lineChartColors = [
     {
       backgroundColor: '#89C4F4',
@@ -26,16 +21,25 @@ export class GraphicComponent implements OnInit {
     }
   ];
 
+  @Output() actualLevel: EventEmitter<any> = new EventEmitter();
+
   constructor(public crud: CrudServiceService) { }
 
   ngOnInit() {
     this.crud.getHistorico().subscribe(data => {
       const array = data.obj;
-      const elements = [];
+      const elements: Array<any> = [];
+      let aux = 1;
+
       array.forEach(element => {
-        elements.push(element.porcentagem);
+        this.lineChartLabels.push(aux + 'º');
+        aux += 1;
+        elements.push(element.porcentagem * 100);
+        if (aux - 1 === array.length) {
+          this.actualLevel.emit(array[aux - 2]);
+        }
       });
-      this.lineChartData = elements;
+      this.lineChartData = [{data: elements, label: 'Nível de Água'}];
     }, error => {
       console.log(error);
     });

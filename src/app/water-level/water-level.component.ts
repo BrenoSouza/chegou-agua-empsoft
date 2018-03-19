@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { ChatService } from '../chat.service';
 
 @Component({
@@ -13,6 +13,32 @@ export class WaterLevelComponent implements OnInit {
   protected banhos = 0;
   protected lavarRoupa = 0;
   protected descarga = 0;
+  protected sentinell = false;
+
+  @Output() newValue: EventEmitter<any> = new EventEmitter();
+
+  protected _level = '';
+
+  @Input()
+  set level(level: any) {
+    if (this.sentinell) {
+      this.porcentagem = level.porcentagem;
+      this.litros = level.litros;
+      this.sentinell = false;
+
+      if (this.porcentagem >= 50) {
+        this.alert = 'success';
+      } else if (this.porcentagem > 25) {
+        this.alert = 'warning';
+      } else {
+        this.alert = 'danger';
+      }
+    }
+
+  }
+
+  get level(): any { return this._level; }
+
 
   constructor(private socketService: ChatService) { }
 
@@ -33,6 +59,8 @@ export class WaterLevelComponent implements OnInit {
         this.banhos = this.litros / 20;
         this.lavarRoupa = this.litros / 16;
         this.descarga = this.litros / 20;
+      } else {
+        this.sentinell = true;
       }
     });
   }
