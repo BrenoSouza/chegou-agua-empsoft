@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CrudServiceService } from '../crud-service.service';
 
 @Component({
@@ -10,6 +10,7 @@ export class GraphicComponent implements OnInit {
   protected lineChartType  = 'line';
   protected lineChartLabels = ['Nível'];
   protected lineChartData = [];
+  protected isDataAvailable = false;
 
   protected lineChartOptions = {
     responsive: true
@@ -26,6 +27,19 @@ export class GraphicComponent implements OnInit {
     }
   ];
 
+  private _data = {};
+
+  @Input()
+  set data(data: any) {
+    if (data.porcentagem || data.porcentagem != null) {
+      const newData = this.lineChartData.slice();
+      newData.push(data.porcentagem * 100);
+      this.lineChartData = newData;
+    }
+  }
+
+  get data(): any { return this._data; }
+
   constructor(public crud: CrudServiceService) { }
 
   ngOnInit() {
@@ -33,7 +47,7 @@ export class GraphicComponent implements OnInit {
       const array = data.obj;
       const elements = [];
       array.forEach(element => {
-        elements.push(element.porcentagem);
+        elements.push(element.porcentagem * 100);
       });
       this.lineChartData = elements;
     }, error => {

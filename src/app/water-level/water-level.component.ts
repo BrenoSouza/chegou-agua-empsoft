@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ChatService } from '../chat.service';
 
 @Component({
@@ -11,23 +11,31 @@ export class WaterLevelComponent implements OnInit {
   protected porcentagem = 0;
   protected litros = 0;
 
-  constructor(private socketService: ChatService) { }
+  private _data = {};
+
+  @Input()
+  set data(data: any) {
+    if (data.porcentagem || data.porcentagem != null) {
+      this.porcentagem = Number(data.porcentagem);
+      this.litros = data.litros;
+
+      if (this.porcentagem >= 0.5) {
+        this.alert = 'success';
+      } else if (this.porcentagem > 0.25) {
+        this.alert = 'warning';
+      } else {
+        this.alert = 'danger';
+      }
+    }
+  }
+
+  get data(): any { return this._data; }
+
+
+  constructor() { }
 
   ngOnInit() {
-    this.socketService.messages.subscribe(data => {
-      if (data.porcentagem || data.porcentagem != null) {
-        this.porcentagem = Number(data.porcentagem) * 100;
-        this.litros = data.litros;
 
-        if (this.porcentagem >= 50) {
-          this.alert = 'success';
-        } else if (this.porcentagem > 25) {
-          this.alert = 'warning';
-        } else {
-          this.alert = 'danger';
-        }
-      }
-    });
   }
 
 }
