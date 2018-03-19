@@ -1,0 +1,31 @@
+
+
+<div class="progress-bar-container">
+    <div class="container text-center">
+        <h1>{{porcentagem.toFixed(1)}}%</h1>
+        </div>
+    <div style="display: block; text-align:center" class="text-center">
+        <canvas baseChart
+                    [data]="dougChartData"
+                    [labels]="doughnutChartLabels"
+                    [chartType]="doughnutChartType"
+                    [colors]="dougChartColors"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)"></canvas>
+      </div>
+  <!--<progressbar [animate]="true" [value]="porcentagem" [type]="alert"><b>{{porcentagem}}%</b></progressbar>-->
+</div>
+
+<div class="info">
+  <h2>{{litros}} litros restantes</h2>
+</div>
+<p style="margin-left: 5%; margin-top: 10%">
+    Com essa quantidade de água você consegue:
+</p>
+<ul>
+    <li>Tomar {{banhos}} banhos*</li>
+    <li>Lavar {{lavarRoupa}} tanques de roupa*</li>
+    <li>Dar {{descarga}} descargas*</li>
+    <br>
+    <small>*Dados da SANEPAR</small>
+</ul>
